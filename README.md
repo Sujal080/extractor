@@ -1,50 +1,5 @@
-from pyrogram import Client, filters
-from pyrogram.types import Message
-import asyncio
 
-API_ID = 12345678  # 🛠️ Apna API ID yahan daal
-API_HASH = "your_api_hash_here"  # 🛠️ Apna API Hash daal
-BOT_TOKEN = "your_bot_token_here"  # 🛠️ Apna Bot Token yahan daal
 
-bot = Client("funny_redeem_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
-import pyromod.listen  # 📌 Ye line zaroori hai listen() ke liye
+ 🎬 TU GANDU
 
-# 🎬 Funny GIF URL
-FUNNY_GIF = "https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif"
-
-@bot.on_message(filters.command("start"))
-async def start(client, message: Message):
-    await message.reply_text(
-        "😂 *Welcome to the Funniest Redeem Bot!*\n\nSend /redeem to activate your brain cells 💥",
-        parse_mode="markdown"
-    )
-
-@bot.on_message(filters.command("redeem"))
-async def redeem(client, message: Message):
-    editable = await message.reply_text("🔐 *Please enter your secret redeem code:*", parse_mode="markdown")
-
-    try:
-        user_input = await bot.listen(message.chat.id, timeout=60)
-        code = user_input.text
-        await user_input.delete()
-    except:
-        return await editable.edit("⏰ *Time's up! Even your code gave up on you...*", parse_mode="markdown")
-
-    funny_reply = f"""
-🎉 *Redeem Code Activated Successfully!* 🎉
-
-🔑 *CODE:*
-`{code}`
-
-✅ Use it wisely, agent 😎
-
-🔁 Share with friends (or don’t 😉)
-"""
-    await editable.delete()
-    await message.reply_animation(
-        animation=FUNNY_GIF,
-        caption=funny_reply,
-        parse_mode="markdown"
-    )
-
-bot.run()
+ 
